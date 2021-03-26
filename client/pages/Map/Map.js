@@ -23,7 +23,7 @@ export default function Map(props) {
         })();
       }, []);
     
-      let text = 'Waiting..';
+      let text = 'Waiting...';
       if (errorMsg) {
         text = errorMsg;
       } else if (location) {
@@ -38,14 +38,14 @@ export default function Map(props) {
       );
 }
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    map: {
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  map: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+});

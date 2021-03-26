@@ -1,18 +1,10 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Alert,
-  TouchableOpacity
-} from "react-native";
+import React from 'react';
+
 
 import { createStackNavigator } from '@react-navigation/stack';
-import Map from './client/pages/Map';
+import Map from './client/pages/Map/Map';
 
 const Stack = createStackNavigator();
 
