@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
+// import RNLocation from 'react-native-location';
 // import * as Permissions from 'expo-permissions';
 
 export default function Map(props) {
@@ -20,6 +21,7 @@ export default function Map(props) {
     
           let location = await Location.getCurrentPositionAsync({});
           setLocation(location);
+          // console.log(location.coords.latitude)
         })();
       }, []);
     
@@ -33,7 +35,15 @@ export default function Map(props) {
       return (
         <View>
               <Text>{text}</Text>
-              <MapView style={styles.map} />
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+              latitudeDelta: 0.05,
+              longitudeDelta: 0.05,
+            }}
+          />
         </View>
       );
 }
