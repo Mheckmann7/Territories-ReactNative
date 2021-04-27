@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Location from 'expo-location';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+
 // import RNLocation from 'react-native-location';
 // import * as Permissions from 'expo-permissions';
 
@@ -18,18 +19,28 @@ export default function Map(props) {
             setErrorMsg('Permission to access location was denied');
             return;
           }
-    
+
           let location = await Location.getCurrentPositionAsync({});
           setLocation(location);
-          // console.log(location.coords.latitude)
         })();
-      }, []);
-    
+    }, []);
+  
+
       let text = 'Waiting...';
       if (errorMsg) {
         text = errorMsg;
       } else if (location) {
         text = JSON.stringify(location);
+
+      }
+      let currentLocation = null
+      if (location !== null) {
+        currentLocation = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }
       }
     
       return (
@@ -37,13 +48,12 @@ export default function Map(props) {
               <Text>{text}</Text>
           <MapView
             style={styles.map}
-            initialRegion={{
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
-              latitudeDelta: 0.05,
-              longitudeDelta: 0.05,
-            }}
-          />
+            initialRegion={currentLocation} >
+            <Marker
+              key={1}
+              coordinate={{ latitude: currentLocation.latitude, longitude: currentLocation.longitude}}
+              />
+          </MapView>
         </View>
       );
 }
