@@ -33,14 +33,24 @@ export default function Map(props) {
         text = JSON.stringify(location);
 
       }
-      let currentLocation = null
-      if (location !== null) {
-        currentLocation = {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }
+  
+  // async componentDidMount() {
+  //   if(this.location !== null){
+      
+  //   }
+  // }
+      // let currentLocation = null
+      // if (location !== null) {
+      //   currentLocation = {
+      //     latitude: location.coords.latitude,
+      //     longitude: location.coords.longitude,
+      //     latitudeDelta: 0.0922,
+      //     longitudeDelta: 0.0421
+      //   }
+      // }
+      if (location === null) {
+        // Better loading logic here
+        return <Text>Loading...</Text>
       }
     
       return (
@@ -48,10 +58,15 @@ export default function Map(props) {
               <Text>{text}</Text>
           <MapView
             style={styles.map}
-            initialRegion={currentLocation} >
+            initialRegion={{
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421
+                }} >
             <Marker
               key={1}
-              coordinate={{ latitude: currentLocation.latitude, longitude: currentLocation.longitude}}
+              coordinate={{ latitude: location.coords.latitude, longitude: location.coords.longitude}}
               />
           </MapView>
         </View>
