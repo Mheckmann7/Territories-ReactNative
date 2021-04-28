@@ -34,20 +34,7 @@ export default function Map(props) {
 
       }
   
-  // async componentDidMount() {
-  //   if(this.location !== null){
-      
-  //   }
-  // }
-      // let currentLocation = null
-      // if (location !== null) {
-      //   currentLocation = {
-      //     latitude: location.coords.latitude,
-      //     longitude: location.coords.longitude,
-      //     latitudeDelta: 0.0922,
-      //     longitudeDelta: 0.0421
-      //   }
-      // }
+  //Wait to until we have the users location before displaying the map
       if (location === null) {
         // Better loading logic here
         return <Text>Loading...</Text>
