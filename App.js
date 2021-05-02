@@ -1,35 +1,42 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { fetchTerritoryData } from './src/services/territoriesService';
-
-
+import { StyleSheet, Text, View, AppRegistry } from "react-native";
+import { fetchTerritoryData } from './services/territoriesService';
+import {BrowserRouter as Router} from 'react-router'
+import { NativeRouter, Route, Link } from "react-router-native";
 import { createStackNavigator } from '@react-navigation/stack';
 import Map from './pages/Map/Map';
+import Signup from './pages/Signup/Signup';
 
 const Stack = createStackNavigator();
 
-
 export default function App() {
 
-  async function getTerritory() {
+  async function getTerritories() {
     const data = await fetchTerritoryData();
-    console.log(data)
+    setTerritories(data)
   }
   
   useEffect(() => {
-    getTerritory()
+    getTerritories()
   }, [])
   
   const [territories, setTerritories] = useState([]);
-  
+  console.log(territories)
 
-    return (
+  return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Map" component={Map}/>
-        </Stack.Navigator>
-        </NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Map"
+          component={Map}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup} />
+      </Stack.Navigator>
+      </NavigationContainer>
     );
 }
 

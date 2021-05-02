@@ -1,14 +1,14 @@
 
 
 import React, { useState, useEffect } from "react";
-import {StyleSheet, Text, View, Dimensions } from 'react-native';
+import {StyleSheet, Text, View, Dimensions, Button } from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 
 // import RNLocation from 'react-native-location';
 // import * as Permissions from 'expo-permissions';
 
-export default function Map(props) {
+export default function Map({navigation}) {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
@@ -22,6 +22,7 @@ export default function Map(props) {
 
           let location = await Location.getCurrentPositionAsync({});
           setLocation(location);
+          console.log(location)
         })();
     }, []);
   
@@ -42,9 +43,16 @@ export default function Map(props) {
     
       return (
         <View>
-              <Text>{text}</Text>
+          <Text>{text}</Text>
+          <Button
+      title="Signup"
+      onPress={() =>
+        navigation.navigate('Signup')
+      }
+    />
           <MapView
             style={styles.map}
+            // centers the map on the users location 
             initialRegion={{
                   latitude: location.coords.latitude,
                   longitude: location.coords.longitude,
@@ -52,6 +60,7 @@ export default function Map(props) {
                   longitudeDelta: 0.0421
                 }} >
             <Marker
+              //places a marker on the users initial location 
               key={1}
               coordinate={{ latitude: location.coords.latitude, longitude: location.coords.longitude}}
               />
