@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Dimensions, Button } from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
+import Nav from '../../components/Nav'
 
 // import RNLocation from 'react-native-location';
 // import * as Permissions from 'expo-permissions';
@@ -44,18 +45,7 @@ export default function Map({navigation}) {
       return (
         <View>
           <Text>{text}</Text>
-            <Button
-            title="Signup"
-            onPress={() =>
-              navigation.navigate('Signup')
-            }
-            />
-            <Button
-            title="Login"
-            onPress={() =>
-              navigation.navigate('Login')
-            }
-            />
+          <Nav />
           <MapView
             style={styles.map}
             // centers the map on the users location 

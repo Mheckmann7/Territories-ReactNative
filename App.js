@@ -6,9 +6,9 @@ import { fetchTerritoryData } from './services/territoriesService';
 import {BrowserRouter as Router} from 'react-router'
 import { NativeRouter, Route, Link } from "react-router-native";
 import { createStackNavigator } from '@react-navigation/stack';
-import Map from './pages/Map/Map';
-import Signup from './pages/Signup/Signup';
-import Login from './pages/Login/Login';
+import Map from './pages/Map';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 const Stack = createStackNavigator();
 
