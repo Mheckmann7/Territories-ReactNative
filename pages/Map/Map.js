@@ -44,12 +44,18 @@ export default function Map({navigation}) {
       return (
         <View>
           <Text>{text}</Text>
-          <Button
-      title="Signup"
-      onPress={() =>
-        navigation.navigate('Signup')
-      }
-    />
+            <Button
+            title="Signup"
+            onPress={() =>
+              navigation.navigate('Signup')
+            }
+            />
+            <Button
+            title="Login"
+            onPress={() =>
+              navigation.navigate('Login')
+            }
+            />
           <MapView
             style={styles.map}
             // centers the map on the users location 

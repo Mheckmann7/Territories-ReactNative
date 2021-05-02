@@ -8,6 +8,7 @@ import { NativeRouter, Route, Link } from "react-router-native";
 import { createStackNavigator } from '@react-navigation/stack';
 import Map from './pages/Map/Map';
 import Signup from './pages/Signup/Signup';
+import Login from './pages/Login/Login';
 
 const Stack = createStackNavigator();
 
@@ -34,7 +35,12 @@ export default function App() {
         />
         <Stack.Screen
           name="Signup"
-          component={Signup} />
+          component={Signup}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+        />
       </Stack.Navigator>
       </NavigationContainer>
     );
