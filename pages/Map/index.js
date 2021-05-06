@@ -45,7 +45,22 @@ export default function Map({navigation}) {
       return (
         <View>
           <Text>{text}</Text>
-          <Nav />
+          {/* <Nav navigation={this.props.navigation}/> */}
+ 
+          <Button
+    
+        title="Login"
+        onPress={() =>
+          navigation.navigate('Login')
+        }
+          />
+          <Button
+        title="Signup"
+        onPress={() =>
+          navigation.navigate('Signup')
+        }
+            />
+
           <MapView
             style={styles.map}
             // centers the map on the users location 
@@ -75,4 +90,5 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
+
 });

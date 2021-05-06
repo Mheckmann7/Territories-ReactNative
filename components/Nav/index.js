@@ -5,9 +5,9 @@ export default function Nav(props) {
     return (
         <View>
         <Button
-        title="Signup"
-        onPress={() =>
-          navigation.navigate('Signup')
+          title="Signup"
+          onPress={() =>
+            this.props.navigation.navigate('Signup')
         }
         />
         <Button
