@@ -9,11 +9,7 @@ import { NativeRouter, Route, Link } from "react-router-native";
 
 import MainTabScreen from './pages/Menu';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-// import { Icon } from 'react-native-vector-icons/Icon';
-
-
-
-
+import { DrawerContent } from './pages/Drawer';
 
 const Drawer = createDrawerNavigator();
 
@@ -35,7 +31,7 @@ export default function App() {
 
   return (
       <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
         <Drawer.Screen name="Home" component={MainTabScreen} />
       </Drawer.Navigator>
       </NavigationContainer>
