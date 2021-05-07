@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, AppRegistry } from "react-native";
+import { StyleSheet, Text, View, AppRegistry, Button } from "react-native";
 import { fetchTerritoryData } from './services/territoriesService';
 import {BrowserRouter as Router} from 'react-router'
 import { NativeRouter, Route, Link } from "react-router-native";
@@ -10,6 +10,9 @@ import Map from './pages/Map';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+// import { Icon } from 'react-native-vector-icons/Icon';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const HomeStack = createStackNavigator();
 const MapStack = createStackNavigator();
@@ -21,7 +24,17 @@ const HomeStackScreen = ({navigation}) => (
       backgroundColor: '#009387',
     }
   }}>
-    <HomeStack.Screen name="Home" component={Login} options={{title: 'Overview'}} />
+    <HomeStack.Screen
+      name="Home"
+      component={Login}
+      options={{
+        title: 'Overview',
+        headerLeft: () => (
+          <Ionicons.Button name="md-menu" size={25} backgroundColor='#009387'
+            onPress={() => navigation.openDrawer()}></Ionicons.Button>
+      )
+      }}
+    />
   </HomeStack.Navigator>
 )
 
@@ -53,7 +66,7 @@ export default function App() {
       <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeStackScreen} />
-        <Drawer.Screen name="Details" component={MapStackScreen} /> 
+        <Drawer.Screen name="Map" component={MapStackScreen} /> 
       </Drawer.Navigator>
       </NavigationContainer>
     );
