@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-export default function Signup({navigation, route}) {
+export default function Profile({navigation, route}) {
     return (
-        <Text>Signup</Text>
+        <Text>Profile</Text>
     )
 }
-

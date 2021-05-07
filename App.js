@@ -10,6 +10,9 @@ import { NativeRouter, Route, Link } from "react-router-native";
 import MainTabScreen from './pages/Menu';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from './pages/Drawer';
+import Settings from './pages/Settings';
+
+import RootStackScreen from './pages/RootStackScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -30,10 +33,12 @@ export default function App() {
   console.log(territories)
 
   return (
-      <NavigationContainer>
-      <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={MainTabScreen} />
-      </Drawer.Navigator>
+    <NavigationContainer>
+      <RootStackScreen /> 
+      {/* <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+        <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+        <Drawer.Screen name="Settings" component={Settings} />
+      </Drawer.Navigator> */}
       </NavigationContainer>
     );
 }

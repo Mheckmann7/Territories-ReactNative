@@ -4,13 +4,13 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import Map from '../Map';
 import Home from '../Home';
-import Login from '../Login';
+import Profile from '../Profile';
 
 import { Ionicons } from '@expo/vector-icons';
 
 const HomeStack = createStackNavigator();
 const MapStack = createStackNavigator();
-const LoginStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -44,8 +44,8 @@ export default function MainTabScreen() {
                 }}
             />
             <Tab.Screen
-                name="Login"
-                component={LoginStackScreen}
+                name="Profile"
+                component={ProfileStackScreen}
                 options={{
                     tabBarLabel: 'Profile',
                     tabBarColor: '#E94F46',
@@ -96,13 +96,13 @@ const HomeStackScreen = ({ navigation }) => (
         }}/>
     </MapStack.Navigator>
   )
-  const LoginStackScreen = ({navigation}) => (
-    <LoginStack.Navigator screenOptions={{
+  const ProfileStackScreen = ({navigation}) => (
+    <ProfileStack.Navigator screenOptions={{
       headerStyle: {
         backgroundColor: '#E94F46',
       }
     }}>
-          <LoginStack.Screen name="Login" component={Login}
+          <ProfileStack.Screen name="Profile" component={Profile}
           options={{
           title: 'Overview',
           headerLeft: () => (
@@ -110,5 +110,5 @@ const HomeStackScreen = ({ navigation }) => (
               onPress={() => navigation.openDrawer()}></Ionicons.Button>
         )
         }} />
-    </LoginStack.Navigator>
+    </ProfileStack.Navigator>
   )

@@ -54,12 +54,12 @@ export default function Map({navigation}) {
           navigation.navigate('Login')
         }
           /> */}
-          <Button
+          {/* <Button
         title="Signup"
         onPress={() =>
           navigation.navigate('Signup')
         }
-            />
+            /> */}
 
           <MapView
             style={styles.map}

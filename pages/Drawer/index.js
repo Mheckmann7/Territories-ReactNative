@@ -65,7 +65,7 @@ export function DrawerContent(props) {
                             /> 
                             )}
                             label="Profile"
-                            onPress={() => {props.navigation.navigate('Login') }}
+                            onPress={() => {props.navigation.navigate('Profile') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -77,6 +77,17 @@ export function DrawerContent(props) {
                             )}
                             label="Map"
                             onPress={() => {props.navigation.navigate('Map') }}
+                        />
+                                <DrawerItem
+                            icon={({ color, size }) => (
+                            <Ionicons
+                            name="settings"
+                            color={color}
+                            size={size}
+                            /> 
+                            )}
+                            label="Settings"
+                            onPress={() => {props.navigation.navigate('Settings') }}
                             />
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">
