@@ -47,13 +47,13 @@ export default function Map({navigation}) {
           <Text>{text}</Text>
           {/* <Nav navigation={this.props.navigation}/> */}
  
-          <Button
+          {/* <Button
     
         title="Login"
         onPress={() =>
           navigation.navigate('Login')
         }
-          />
+          /> */}
           <Button
         title="Signup"
         onPress={() =>
