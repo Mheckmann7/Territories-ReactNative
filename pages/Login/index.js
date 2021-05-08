@@ -1,36 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput, StatusBar } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
+import { State } from "react-native-gesture-handler";
 
 export default function Login({ navigation, route }) {
     
-    const [checkmark, setCheckmark] = React.useState({
+    const [icon, setIcon] = React.useState({
         check_textInputChange: false,
+        secureTextEntry: true,
     })
 
     const textInputChange = (val) => {
         if (val.length !== 0) {
-            setCheckmark({
-                ...checkmark,
+            setIcon({
+                ...icon,
                 check_textInputChange: true
             });
         } else {
-            setCheckmark({
-                ...checkmark,
+            setIcon({
+                ...icon,
                 check_textInputChange: false
             });
         }
     }
 
+    const updateSecureTextEntry = () => {
+            setIcon({
+                ...icon,
+                secureTextEntry: !icon.secureTextEntry,
+            });
+
+        }
+    
+
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor='tomato' barStyle='light-content' />
             <View style={styles.header}>
                 <Text style={styles.text_header}>Welcome</Text>
             </View>
-            <View style={styles.footer}>
+            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
                 <Text style={styles.text_footer}>Username</Text>
                 <View style={styles.action}>
                     <Ionicons
@@ -44,10 +56,10 @@ export default function Login({ navigation, route }) {
                         autoCapitalize="none"
                         onChangeText={(val) => textInputChange(val)}
                     />
-                    {checkmark.check_textInputChange ?
+                    {icon.check_textInputChange ?
                         <Ionicons
                             name="checkmark"
-                            color="gray"
+                            color="green"
                             size={20}
                         />
                         : null} 
@@ -63,24 +75,42 @@ export default function Login({ navigation, route }) {
                     />
                     <TextInput
                         placeholder="Your Password"
-                        secureTextEntry={true}
+                        secureTextEntry={icon.secureTextEntry ? true : false}
                         style={styles.textInput}
                         autoCapitalize="none"
                     />
-                    <Ionicons
-                        name="eye-off"
-                        color="gray"
-                        size={20}
-                    />
-                    {/* <TouchableOpacity
-                        onPress={() => navigation.navigate('Profile')}
-                        
-                    >
-                        <Text style={[styles.textSign]}>Home</Text>
-                    </TouchableOpacity> */}
-                    
+                    <TouchableOpacity onPress={updateSecureTextEntry}>
+                        {icon.secureTextEntry ?
+                            <Ionicons
+                                name="eye-off"
+                                color="gray"
+                                size={20}
+                            />
+                            :
+                            <Ionicons
+                                name="eye"
+                                color="gray"
+                                size={20}
+                            />
+                        }
+                    </TouchableOpacity>
                 </View>
-            </View>
+                <View style={styles.button}>
+                    <LinearGradient
+                        colors={['tomato', 'red']}
+                        style={styles.signIn}
+                    >
+                        <Text style={[styles.textSign,  {color: 'white'}]}>Sign In</Text>
+                    </LinearGradient>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Signup')}
+                        style={[styles.signIn, {borderColor: 'tomato', borderWidth: 1, marginTop: 15}]}
+                    >
+                        <Text style={[styles.textSign,  {color: 'tomato'}]}>Sign up</Text>
+                    </TouchableOpacity>
+
+                </View>
+            </Animatable.View>
         </View>
     )
 }
@@ -88,7 +118,7 @@ export default function Login({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "green"
+        backgroundColor: "tomato"
     },
     header: {
         flex: 1,
@@ -111,7 +141,7 @@ const styles = StyleSheet.create({
     },
     text_footer: {
         color: "gray",
-        fontSize: 18
+        fontSize: 18,
     },
     action: {
         flexDirection: "row",
@@ -138,6 +168,7 @@ const styles = StyleSheet.create({
     },
     textSign: {
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+      
     }
 });
