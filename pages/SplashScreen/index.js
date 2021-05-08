@@ -3,7 +3,6 @@ import { StyleSheet, Text, Button, Dimensions, View, Image, TouchableOpacity } f
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-
 import * as Animatable from 'react-native-animatable';
 
 export default function SplashScreen({navigation, route}) {

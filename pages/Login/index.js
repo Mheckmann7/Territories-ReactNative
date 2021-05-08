@@ -7,7 +7,23 @@ import * as Animatable from 'react-native-animatable';
 
 export default function Login({ navigation, route }) {
     
-    const [user, setUser] = React.useState({})
+    const [checkmark, setCheckmark] = React.useState({
+        check_textInputChange: false,
+    })
+
+    const textInputChange = (val) => {
+        if (val.length !== 0) {
+            setCheckmark({
+                ...checkmark,
+                check_textInputChange: true
+            });
+        } else {
+            setCheckmark({
+                ...checkmark,
+                check_textInputChange: false
+            });
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -26,12 +42,15 @@ export default function Login({ navigation, route }) {
                         placeholder="Your Username"
                         style={styles.textInput}
                         autoCapitalize="none"
+                        onChangeText={(val) => textInputChange(val)}
                     />
-                    <Ionicons
-                        name="checkmark"
-                        color="gray"
-                        size={20}
-                    />
+                    {checkmark.check_textInputChange ?
+                        <Ionicons
+                            name="checkmark"
+                            color="gray"
+                            size={20}
+                        />
+                        : null} 
                     
                 </View>
                 <Text style={[styles.text_footer,
@@ -53,6 +72,12 @@ export default function Login({ navigation, route }) {
                         color="gray"
                         size={20}
                     />
+                    {/* <TouchableOpacity
+                        onPress={() => navigation.navigate('Profile')}
+                        
+                    >
+                        <Text style={[styles.textSign]}>Home</Text>
+                    </TouchableOpacity> */}
                     
                 </View>
             </View>
