@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import { State } from "react-native-gesture-handler";
+import { getPathFromState } from "@react-navigation/core";
 
 export default function Login({ navigation, route }) {
     
