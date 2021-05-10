@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput, StatusBar, Touchable } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,24 +7,65 @@ import * as Animatable from 'react-native-animatable';
 import { State } from "react-native-gesture-handler";
 import { getPathFromState } from "@react-navigation/core";
 
+import { AuthContext } from '../../components/context';
+
 export default function Login({ navigation, route }) {
     
+    const [data, setData] = React.useState({
+        userName: '',
+        password: '',
+        
+
+    });
+    console.log(data.userName, data.password)
+
+
     const [icon, setIcon] = React.useState({
         check_textInputChange: false,
         secureTextEntry: true,
-    })
+        validUsername: true,
+        validPassword: true, 
+    });
+
+    const handleLogin = (userName, password) => {
+        signIn(userName, password);
+    }
+
+
+
+    const { signIn } = React.useContext(AuthContext);
 
     const textInputChange = (val) => {
         if (val.length !== 0) {
+            setData({
+                ...data,
+                userName: val,
+            })
             setIcon({
                 ...icon,
-                check_textInputChange: true
+                check_textInputChange: true,
+                validUsername: true, 
             });
+      
         } else {
             setIcon({
                 ...icon,
-                check_textInputChange: false
+                check_textInputChange: false,
+                validUsername: false, 
             });
+        }
+    }
+
+    const handlePasswordChange = (val) => {
+        if (val.length !== 0) {
+            setData({
+                ...data,
+                password: val,
+            })
+            setIcon({
+                ...icon,
+                validPassword: false
+            })
         }
     }
 
@@ -79,6 +120,7 @@ export default function Login({ navigation, route }) {
                         secureTextEntry={icon.secureTextEntry ? true : false}
                         style={styles.textInput}
                         autoCapitalize="none"
+                        onChangeText={(val)=> handlePasswordChange(val)}
                     />
                     <TouchableOpacity onPress={updateSecureTextEntry}>
                         {icon.secureTextEntry ?
@@ -97,12 +139,16 @@ export default function Login({ navigation, route }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.button}>
+                    <TouchableOpacity
+                        style={styles.signIn}
+                        onPress={() => { handleLogin(data.userName, data.password)}}>
                     <LinearGradient
                         colors={['tomato', 'red']}
                         style={styles.signIn}
                     >
                         <Text style={[styles.textSign,  {color: 'white'}]}>Sign In</Text>
-                    </LinearGradient>
+                        </LinearGradient>
+                    </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Signup')}
                         style={[styles.signIn, {borderColor: 'tomato', borderWidth: 1, marginTop: 15}]}

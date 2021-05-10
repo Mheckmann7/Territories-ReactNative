@@ -17,10 +17,13 @@ import {
 
 import { Ionicons } from '@expo/vector-icons';
 
-
+import { AuthContext } from '../../components/context';
 
 export function DrawerContent(props) {
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+
+    const { signOut } = React.useContext(AuthContext); 
+
     const toggleTheme = () => {
         setIsDarkTheme(!isDarkTheme);
     }
@@ -112,7 +115,7 @@ export function DrawerContent(props) {
                     /> 
                     )}
                     label="Signout"
-                    onPress={() => { }}
+                    onPress={() => {signOut()}}
                 />
             </Drawer.Section>
         </View>
