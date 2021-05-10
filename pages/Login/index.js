@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput, StatusBar, Touchable } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput, StatusBar, Touchable, Alert } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,6 +8,8 @@ import { State } from "react-native-gesture-handler";
 import { getPathFromState } from "@react-navigation/core";
 
 import { AuthContext } from '../../components/context';
+
+import Users from '../../model_test/user';
 
 export default function Login({ navigation, route }) {
     
@@ -23,12 +25,26 @@ export default function Login({ navigation, route }) {
     const [icon, setIcon] = React.useState({
         check_textInputChange: false,
         secureTextEntry: true,
-        validUsername: true,
-        validPassword: true, 
+
     });
 
     const handleLogin = (userName, password) => {
-        signIn(userName, password);
+        const foundUser = Users.filter(item => {
+            return userName == item.userName && password == item.password;
+        });
+        if (data.userName.length == 0 || data.password.length == 0) {
+            Alert.alert('Wrong Input!', 'Field must not be empty', [
+                { text: 'Okay' }
+            ]);
+            return; 
+        }
+        if (foundUser.length == 0) {
+            Alert.alert('Invalid User!', 'Username or password is incorect', [
+                { text: 'Okay' }
+            ]);
+            return; 
+        }
+        signIn(foundUser);
     }
 
 
@@ -44,14 +60,12 @@ export default function Login({ navigation, route }) {
             setIcon({
                 ...icon,
                 check_textInputChange: true,
-                validUsername: true, 
             });
       
         } else {
             setIcon({
                 ...icon,
                 check_textInputChange: false,
-                validUsername: false, 
             });
         }
     }
@@ -62,12 +76,10 @@ export default function Login({ navigation, route }) {
                 ...data,
                 password: val,
             })
-            setIcon({
-                ...icon,
-                validPassword: false
-            })
+           
         }
-    }
+        }
+    
 
     const updateSecureTextEntry = () => {
             setIcon({
