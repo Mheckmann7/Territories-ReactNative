@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity, TextInput, StatusBar, Form } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
-import { State } from "react-native-gesture-handler";
+
 
 export default function Signup({ navigation, route }) {
     
@@ -12,6 +12,28 @@ export default function Signup({ navigation, route }) {
         check_textInputChange: false,
         secureTextEntry: true,
     })
+
+    const [formState, setFormState] = useState(getInitialFormState())
+
+    function getInitialFormState() {
+        return {
+            userName: "",
+            password: "", 
+        }
+    }
+    function handleChange(event) {
+        setFormState(prevState => ({
+            ...prevState,
+            [event.target.name]: event.target.value
+        }));
+    }
+
+    function handleSubmit(event) {
+        // event.preventDefault();
+        console.log('submitted form data', formState)
+        // setFormState(getInitialFormState());
+        // props.history.push('/dashboard')
+    }
 
     const textInputChange = (val) => {
         if (val.length !== 0) {
@@ -42,7 +64,9 @@ export default function Signup({ navigation, route }) {
             <View style={styles.header}>
                 <Text style={styles.text_header}>Sign up now!</Text>
             </View>
+   
             <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+                {/* <View onSubmit={handleSubmit}> */}
                 <Text style={styles.text_footer}>Username</Text>
                 <View style={styles.action}>
                     <Ionicons
@@ -51,6 +75,9 @@ export default function Signup({ navigation, route }) {
                         size={20}
                     />
                     <TextInput
+                        name="userName"
+                        onChangeText={formState.userName}
+                        onChange={handleChange}
                         placeholder="Your Username"
                         style={styles.textInput}
                         autoCapitalize="none"
@@ -73,7 +100,10 @@ export default function Signup({ navigation, route }) {
                         color="gray"
                         size={20}
                     />
-                    <TextInput
+                        <TextInput
+                        name="password"
+                        onChangeText={formState.userName}
+                        onChange={handleChange}
                         placeholder="Your Password"
                         secureTextEntry={icon.secureTextEntry ? true : false}
                         style={styles.textInput}
@@ -95,7 +125,7 @@ export default function Signup({ navigation, route }) {
                         }
                     </TouchableOpacity>
                 </View>
-                <Text style={[styles.text_footer,
+                {/* <Text style={[styles.text_footer,
                     { marginTop: 35 }]}>Confirm Password</Text>
                 <View style={styles.action}>
                     <Ionicons
@@ -124,14 +154,19 @@ export default function Signup({ navigation, route }) {
                             />
                         }
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 <View style={styles.button}>
+                    <TouchableOpacity
+                        onPress={() => handleSubmit()}
+                        style={styles.signIn} >
                     <LinearGradient
                         colors={['tomato', 'red']}
                         style={styles.signIn}
+                        
                     >
                         <Text style={[styles.textSign,  {color: 'white'}]}>Sign up</Text>
-                    </LinearGradient>
+                        </LinearGradient>
+                    </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={[styles.signIn, {borderColor: 'tomato', borderWidth: 1, marginTop: 15}]}
@@ -140,7 +175,9 @@ export default function Signup({ navigation, route }) {
                     </TouchableOpacity>
 
                 </View>
-            </Animatable.View>
+                 {/* </View> */}
+                </Animatable.View>
+               
         </View>
     )
 }
