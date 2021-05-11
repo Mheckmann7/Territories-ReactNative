@@ -4,6 +4,10 @@ import { StyleSheet, Text, View, Dimensions, Platform, Button, TouchableOpacity,
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
+import { onChange } from "react-native-reanimated";
+
+import { AuthContext } from '../../components/context';
+import { signup } from "../../services/userService";
 
 
 export default function Signup({ navigation, route }) {
@@ -13,27 +17,25 @@ export default function Signup({ navigation, route }) {
         secureTextEntry: true,
     })
 
-    const [formState, setFormState] = useState(getInitialFormState())
-
-    function getInitialFormState() {
-        return {
-            userName: "",
-            password: "", 
-        }
-    }
-    function handleChange(event) {
+    const [formState, setFormState] = useState({
+        userName: "",
+        password: "", 
+    })
+    function handleChange(key, val) {
         setFormState(prevState => ({
             ...prevState,
-            [event.target.name]: event.target.value
+            [key]: val
         }));
     }
 
-    function handleSubmit(event) {
+    function handleSubmit() {
         // event.preventDefault();
-        console.log('submitted form data', formState)
-        // setFormState(getInitialFormState());
+        console.log('submitted form data', formState.userName)
+        signUp(formState.userName, formState.password)
         // props.history.push('/dashboard')
     }
+
+    const { signUp } = React.useContext(AuthContext);
 
     const textInputChange = (val) => {
         if (val.length !== 0) {
@@ -41,6 +43,10 @@ export default function Signup({ navigation, route }) {
                 ...icon,
                 check_textInputChange: true
             });
+            // setFormState({
+            //     ...formState,
+            //     userName: val,
+            // })
         } else {
             setIcon({
                 ...icon,
@@ -48,6 +54,17 @@ export default function Signup({ navigation, route }) {
             });
         }
     }
+
+    // const handlePasswordChange = (val) => {
+    //     if (val.length !== 0) {
+    //         setData({
+    //             ...formState,
+    //             password: val,
+    //         })
+           
+    //     }
+    //     }
+    
 
     const updateSecureTextEntry = () => {
             setIcon({
@@ -76,12 +93,13 @@ export default function Signup({ navigation, route }) {
                     />
                     <TextInput
                         name="userName"
-                        onChangeText={formState.userName}
-                        onChange={handleChange}
+                        onValueChange={formState.userName}
+                        // onChangeText={formState.userName}
+                        onChangeText={val => handleChange('userName',val)}
                         placeholder="Your Username"
                         style={styles.textInput}
                         autoCapitalize="none"
-                        onChangeText={(val) => textInputChange(val)}
+                        // onChangeText={(val) => textInputChange(val)} TODO cant have both need a way to refactor this to not onChangeText
                     />
                     {icon.check_textInputChange ?
                         <Ionicons
@@ -102,8 +120,11 @@ export default function Signup({ navigation, route }) {
                     />
                         <TextInput
                         name="password"
-                        onChangeText={formState.userName}
-                        onChange={handleChange}
+                        onValueChange={formState.password}
+                        onChangeText={val => handleChange('password',val)}
+                        // onChangeText={formState.userName}
+                        // onSubmitEditing={(val) => handlePasswordChange(val)}
+                        // onSubmitEditing={handleChange}
                         placeholder="Your Password"
                         secureTextEntry={icon.secureTextEntry ? true : false}
                         style={styles.textInput}

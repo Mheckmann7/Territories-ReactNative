@@ -19,6 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { AuthContext } from '../../components/context';
 
+
 export function DrawerContent(props) {
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
@@ -36,7 +37,7 @@ export function DrawerContent(props) {
                             <Ionicons name='person' size={50}/>
                                 {/* Repalce with a profile image */}
                             <View>
-                                <Title style={styles.title}>User name</Title>
+                                <Title style={styles.title}>UserName</Title>
                                     <Caption style={styles.caption}>Total Points: </Caption>
                             </View>
                         </View>

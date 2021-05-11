@@ -98,7 +98,17 @@ export default function App() {
       }
       dispatch({type: 'LOGOUT'})
     },
-    signUp: () => {
+    signUp: async (formState) => {
+      const userName = formState.userName;
+      const password = formState.password;
+      const userToken = 'randomToken'
+      try {
+        userToken = 'randomToken';
+        await AsyncStorage.setItem('userToken', userToken)
+      } catch (error) {
+        console.log(error)
+      }
+      dispatch({ type: 'REGISTER', id: userName, token: userToken});
       // setUserToken('randomToken');
       // setIsLoading(false);
     }
