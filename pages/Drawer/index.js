@@ -22,7 +22,7 @@ import { AuthContext } from '../../components/context';
 
 export function DrawerContent(props) {
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-
+    
     const { signOut } = React.useContext(AuthContext); 
 
     const toggleTheme = () => {
@@ -37,7 +37,7 @@ export function DrawerContent(props) {
                             <Ionicons name='person' size={50}/>
                                 {/* Repalce with a profile image */}
                             <View>
-                                <Title style={styles.title}>UserName</Title>
+                                <Title style={styles.title}>{props.userName}</Title>
                                     <Caption style={styles.caption}>Total Points: </Caption>
                             </View>
                         </View>

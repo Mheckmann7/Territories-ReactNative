@@ -81,9 +81,10 @@ export default function App() {
   const authContext = React.useMemo(() => ({
     signIn: async(foundUser) => {
       const userToken = String(foundUser[0].userToken);
-      const userName = foundUser[0].userName;  
+      const userName = foundUser[0].userName;
+      console.log(userName)
         try {
-          userToken = 'randomToken';
+       
           await AsyncStorage.setItem('userToken', userToken)
         } catch (error) {
           console.log(error)
@@ -99,6 +100,7 @@ export default function App() {
       dispatch({type: 'LOGOUT'})
     },
     signUp: async (formState) => {
+      console.log(formState)
       const userName = formState.userName;
       const password = formState.password;
       const userToken = 'randomToken'
@@ -135,12 +137,13 @@ export default function App() {
       </View>
     )
   }
+  console.log(loginState.userName)
 
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
       {loginState.userToken !== null ? (
-      <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+          <Drawer.Navigator drawerContent={props => <DrawerContent {...props} userName={loginState.userName} />}>
         <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
         <Drawer.Screen name="Settings" component={Settings} />
       </Drawer.Navigator>
