@@ -14,7 +14,7 @@ const ImgItem = (props) => {
     return (
         <View>
                 <Image
-                 
+                    key={image}
                     source={image}
                     style={styles.image}
                 />

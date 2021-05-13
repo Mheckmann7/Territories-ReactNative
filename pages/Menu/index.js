@@ -14,7 +14,7 @@ const ProfileStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function MainTabScreen() {
+export default function MainTabScreen(props) {
     return (
         <Tab.Navigator
             initialRouteName="Home"
@@ -69,7 +69,7 @@ const HomeStackScreen = ({ navigation }) => (
         name="Home"
         component={Home}
         options={{
-          title: 'Overview',
+          title: 'Territories',
           headerLeft: () => (
             <Ionicons.Button name="md-menu" size={25} backgroundColor='#E94F46'
               onPress={() => navigation.openDrawer()}></Ionicons.Button>
@@ -88,7 +88,7 @@ const HomeStackScreen = ({ navigation }) => (
     }}>
           <MapStack.Screen name="Map" component={Map}
           options={{
-          title: 'Overview',
+          title: 'Territories',
           headerLeft: () => (
             <Ionicons.Button name="md-menu" size={25} backgroundColor='#E94F46'
               onPress={() => navigation.openDrawer()}></Ionicons.Button>
@@ -104,7 +104,7 @@ const HomeStackScreen = ({ navigation }) => (
     }}>
           <ProfileStack.Screen name="Profile" component={Profile}
           options={{
-          title: 'Overview',
+          title: 'Territories',
           headerLeft: () => (
             <Ionicons.Button name="md-menu" size={25} backgroundColor='#E94F46'
               onPress={() => navigation.openDrawer()}></Ionicons.Button>
