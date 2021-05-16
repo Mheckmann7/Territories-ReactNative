@@ -69,7 +69,6 @@ export function DrawerContent(props) {
                             /> 
                             )}
                             label="Profile"
-                            userName={props.userName}
                             onPress={() => {props.navigation.navigate('Profile') }}
                         />
                         <DrawerItem
