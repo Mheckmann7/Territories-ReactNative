@@ -31,7 +31,7 @@ export default function Signup({ navigation, route }) {
     function handleSubmit() {
         // event.preventDefault();
         console.log('submitted form data', formState.userName)
-        signUp(formState.userName, formState.password)
+        signUp(formState)
         // props.history.push('/dashboard')
     }
 
