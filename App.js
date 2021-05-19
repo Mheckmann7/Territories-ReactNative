@@ -43,7 +43,9 @@ export default function App() {
     userName: null,
     userToken: null,
   };
-
+  // useReducer with initial state, userName and userToken are null isLoading is true
+  // Reducer function accepts state and some action, based upon the action we can perform different tasks using a switch case
+  
   const loginReducer = (prevState, action) => {
     switch (action.type) {
       case 'RETREIVE_TOKEN':
@@ -75,7 +77,7 @@ export default function App() {
         };
     }
   };
-
+//useReducer is passed the reducer function and the initialLoginState,
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
   const authContext = React.useMemo(() => ({
